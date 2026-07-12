@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SunSof Games — Developer Portal</title>
-    <meta name="description" content="Panel de desarrollo interno de SunSof Games: filosofía del estudio, stack técnico, catálogo de juegos y modelo de negocio." />
+    <title>SunSof Games</title>
+    <meta name="description" content="SunSof Games — independent mobile game studio. Games catalog and legal documents." />
     <style>
       :root {
         --bg-0: #030305;
@@ -14,24 +14,13 @@
         --panel-border: rgba(255, 255, 255, 0.08);
         --neon-cyan: #00f2fe;
         --neon-violet: #7a5cff;
-        --neon-magenta: #ff007f;
         --neon-gold: #ffd700;
-        --neon-green: #37e6c4;
         --text-main: #e8e8f0;
         --text-dim: #9a9ab0;
         --text-faint: #64647a;
-        --radius-lg: 26px;
-        --radius-md: 18px;
-        --radius-sm: 10px;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
+      * { box-sizing: border-box; }
 
       body {
         margin: 0;
@@ -40,636 +29,226 @@
         color: var(--text-main);
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
-        overflow-x: hidden;
       }
 
-      h1, h2, h3, h4 {
-        font-family: "Orbitron", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        margin: 0;
-      }
-
-      /* ---------- Ambient background ---------- */
-      .bg-glow {
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        background:
-          radial-gradient(700px 500px at 12% -8%, rgba(122, 92, 255, 0.16), transparent 60%),
-          radial-gradient(700px 500px at 92% 4%, rgba(0, 242, 254, 0.12), transparent 60%),
-          radial-gradient(900px 700px at 50% 110%, rgba(255, 0, 127, 0.08), transparent 60%),
-          radial-gradient(ellipse at top, var(--bg-1) 0%, var(--bg-0) 70%);
-      }
-
-      .bg-grid {
+      body::before {
+        content: "";
         position: fixed;
         inset: 0;
         z-index: -1;
-        opacity: 0.35;
-        background-image:
-          linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-        background-size: 42px 42px;
-        mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+        background:
+          radial-gradient(650px 420px at 15% -10%, rgba(122, 92, 255, 0.16), transparent 60%),
+          radial-gradient(650px 420px at 90% 6%, rgba(0, 242, 254, 0.12), transparent 60%),
+          radial-gradient(ellipse at top, var(--bg-1) 0%, var(--bg-0) 70%);
       }
 
-      /* ---------- Layout helpers ---------- */
+      h1, h2, h3 {
+        font-family: "Orbitron", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+        font-weight: 700;
+        margin: 0;
+      }
+
       .wrap {
-        max-width: 1180px;
+        max-width: 780px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        padding: 0 1.25rem 4rem;
       }
 
-      section {
-        padding: 5.5rem 0;
-        scroll-margin-top: 5rem;
-      }
-
-      section + section {
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.72rem;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        color: var(--neon-cyan);
-        text-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
-        margin-bottom: 0.9rem;
-        font-family: "Orbitron", sans-serif;
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 22px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--neon-cyan));
-      }
-
-      .section-title {
-        font-size: clamp(1.5rem, 3.4vw, 2.1rem);
-        margin-bottom: 0.6rem;
-        background: linear-gradient(135deg, #ffffff, var(--neon-cyan) 140%);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-
-      .section-sub {
-        color: var(--text-dim);
-        max-width: 680px;
-        font-size: 1.02rem;
-        margin-bottom: 2.6rem;
-      }
-
-      /* ---------- Nav ---------- */
-      header.top-nav {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        background: rgba(4, 4, 8, 0.7);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .nav-inner {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 0.9rem 1.5rem;
+      /* ---------- Language switcher ---------- */
+      .lang-switch {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .nav-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: "Orbitron", sans-serif;
-        font-size: 0.95rem;
-        letter-spacing: 1.5px;
-        color: var(--text-main);
-        white-space: nowrap;
-      }
-
-      .nav-brand .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: var(--neon-cyan);
-        box-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
-      }
-
-      nav.nav-links {
-        display: flex;
-        gap: 4px;
+        justify-content: center;
+        gap: 6px;
+        padding: 1.4rem 0 0;
         flex-wrap: wrap;
-        justify-content: flex-end;
       }
 
-      nav.nav-links a {
-        font-size: 0.78rem;
+      .lang-switch button {
+        font-family: inherit;
+        font-size: 0.72rem;
         letter-spacing: 1px;
         text-transform: uppercase;
+        font-weight: 700;
         color: var(--text-dim);
-        text-decoration: none;
-        padding: 8px 12px;
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        padding: 6px 13px;
         border-radius: 999px;
+        cursor: pointer;
         transition: all 0.2s ease;
-        white-space: nowrap;
       }
 
-      nav.nav-links a:hover {
+      .lang-switch button:hover {
         color: var(--text-main);
-        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(0, 242, 254, 0.3);
+      }
+
+      .lang-switch button.active {
+        color: #04141a;
+        background: linear-gradient(135deg, var(--neon-cyan), #63f6ff);
+        border-color: transparent;
+        box-shadow: 0 0 16px rgba(0, 242, 254, 0.35);
+      }
+
+      .lang-switch button.active::before {
+        content: "✓ ";
       }
 
       /* ---------- Hero ---------- */
-      .hero {
-        padding: 5.5rem 0 4rem;
+      header.hero {
+        padding: 3rem 0 2.6rem;
         text-align: center;
       }
 
-      .hero-badge {
-        display: inline-flex;
+      .mark {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 1.1rem;
+        border-radius: 16px;
+        display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--neon-gold);
-        background: rgba(255, 215, 0, 0.08);
-        border: 1px solid rgba(255, 215, 0, 0.25);
-        padding: 7px 16px;
-        border-radius: 999px;
-        margin-bottom: 1.6rem;
+        justify-content: center;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #04141a;
+        background: linear-gradient(135deg, var(--neon-cyan), var(--neon-violet));
+        box-shadow: 0 0 32px rgba(0, 242, 254, 0.3);
       }
 
-      .hero h1 {
-        font-size: clamp(2.2rem, 7vw, 4rem);
+      h1.brand {
+        font-size: clamp(1.8rem, 6vw, 2.6rem);
         letter-spacing: 1px;
-        line-height: 1.08;
-        background: linear-gradient(135deg, #ffffff 20%, var(--neon-cyan) 65%, var(--neon-violet) 110%);
+        background: linear-gradient(135deg, #ffffff, var(--neon-cyan) 130%);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        margin-bottom: 1.1rem;
+        margin-bottom: 0.7rem;
       }
 
-      .hero p.lead {
-        max-width: 720px;
-        margin: 0 auto 2.2rem;
+      p.tagline {
         color: var(--text-dim);
-        font-size: 1.15rem;
-      }
-
-      .hero-cta {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-bottom: 3.2rem;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 26px;
-        border-radius: 999px;
-        font-size: 0.82rem;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 1px solid transparent;
-      }
-
-      .btn-primary {
-        color: #04141a;
-        background: linear-gradient(135deg, var(--neon-cyan), #63f6ff);
-        box-shadow: 0 0 26px rgba(0, 242, 254, 0.35);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 0 36px rgba(0, 242, 254, 0.5);
-      }
-
-      .btn-ghost {
-        color: var(--text-main);
-        border-color: rgba(122, 92, 255, 0.35);
-        background: rgba(122, 92, 255, 0.08);
-      }
-
-      .btn-ghost:hover {
-        border-color: var(--neon-violet);
-        box-shadow: 0 0 22px rgba(122, 92, 255, 0.3);
-        transform: translateY(-2px);
-      }
-
-      /* Stat strip */
-      .stat-strip {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1px;
-        max-width: 900px;
+        font-size: 1.02rem;
+        max-width: 480px;
         margin: 0 auto;
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid var(--panel-border);
-        border-radius: var(--radius-md);
-        overflow: hidden;
       }
 
-      .stat {
-        background: rgba(10, 10, 18, 0.7);
-        padding: 1.4rem 1rem;
+      /* ---------- Sections ---------- */
+      section { margin-top: 3rem; }
+
+      .section-label {
+        font-size: 0.72rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--neon-violet);
         text-align: center;
+        margin-bottom: 1.2rem;
       }
 
-      .stat .num {
-        font-family: "Orbitron", sans-serif;
-        font-size: 1.5rem;
-        color: var(--neon-cyan);
-        text-shadow: 0 0 14px rgba(0, 242, 254, 0.4);
+      /* ---------- Games strip ---------- */
+      .game-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
-      .stat .label {
-        font-size: 0.68rem;
-        letter-spacing: 1.5px;
+      .game-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--panel);
+        border: 1px solid var(--panel-border);
+        border-radius: 16px;
+        padding: 0.9rem 1.2rem;
+      }
+
+      .game-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        box-shadow: 0 0 8px currentColor;
+      }
+
+      .game-row h3 {
+        font-size: 0.95rem;
+        color: var(--text-main);
+        margin-bottom: 1px;
+      }
+
+      .game-row p {
+        margin: 0;
+        color: var(--text-dim);
+        font-size: 0.84rem;
+      }
+
+      .game-soon {
+        margin-left: auto;
+        flex-shrink: 0;
+        font-size: 0.62rem;
+        letter-spacing: 1px;
         text-transform: uppercase;
         color: var(--text-faint);
-        margin-top: 4px;
+        border: 1px solid var(--panel-border);
+        padding: 3px 9px;
+        border-radius: 999px;
       }
 
-      /* ---------- Cards ---------- */
-      .card {
+      /* ---------- Legal cards ---------- */
+      .legal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      @media (max-width: 560px) {
+        .legal-grid { grid-template-columns: 1fr; }
+      }
+
+      .legal-card {
+        display: block;
         background: var(--panel-strong);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
         border: 1px solid var(--panel-border);
-        border-radius: var(--radius-lg);
-        padding: 2rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      }
-
-      .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.4rem;
-      }
-
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.4rem;
-      }
-
-      @media (max-width: 860px) {
-        .grid-2, .grid-3 {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .mini-card {
-        background: var(--panel);
-        border: 1px solid var(--panel-border);
-        border-radius: var(--radius-md);
-        padding: 1.4rem 1.5rem;
-      }
-
-      .mini-card h3 {
-        font-size: 0.95rem;
-        letter-spacing: 1px;
-        color: var(--neon-cyan);
-        margin-bottom: 0.6rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .mini-card p {
-        color: var(--text-dim);
-        font-size: 0.92rem;
-        margin: 0;
-      }
-
-      /* ---------- Pipeline / roadmap ---------- */
-      .pipeline {
-        display: flex;
-        gap: 0;
-        overflow-x: auto;
-        padding-bottom: 1rem;
-        scrollbar-width: thin;
-      }
-
-      .pipeline::-webkit-scrollbar {
-        height: 6px;
-      }
-      .pipeline::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 999px;
-      }
-
-      .phase {
-        min-width: 260px;
-        flex: 1;
+        border-radius: 20px;
         padding: 1.5rem;
-        border-right: 1px dashed rgba(255, 255, 255, 0.1);
-        position: relative;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
 
-      .phase:last-child {
-        border-right: none;
+      .legal-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
       }
 
-      .phase .phase-num {
-        font-family: "Orbitron", sans-serif;
-        font-size: 0.75rem;
-        letter-spacing: 2px;
-        color: var(--neon-violet);
-        margin-bottom: 0.5rem;
-      }
-
-      .phase h4 {
-        font-size: 1.02rem;
+      .legal-card .icon {
+        font-size: 1.4rem;
         margin-bottom: 0.6rem;
-        color: var(--text-main);
-      }
-
-      .phase ul {
-        margin: 0;
-        padding-left: 1.1rem;
-        color: var(--text-dim);
-        font-size: 0.86rem;
-      }
-
-      .phase li {
-        margin-bottom: 0.4rem;
-      }
-
-      /* ---------- Game cards ---------- */
-      .game-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .game-card {
-        background: var(--panel-strong);
-        border: 1px solid var(--panel-border);
-        border-radius: var(--radius-lg);
-        padding: 1.8rem;
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-      }
-
-      .game-card::before {
-        content: "";
-        position: absolute;
-        top: -40%;
-        right: -30%;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        filter: blur(60px);
-        opacity: 0.35;
-        background: var(--accent, var(--neon-cyan));
-        pointer-events: none;
-      }
-
-      .game-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      }
-
-      .game-card .game-head {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 12px;
-        margin-bottom: 0.7rem;
-        position: relative;
-      }
-
-      .game-card h3 {
-        font-size: 1.15rem;
-        color: var(--text-main);
-        letter-spacing: 0.5px;
-      }
-
-      .game-card .codename {
         display: block;
-        font-family: monospace;
-        font-size: 0.72rem;
-        color: var(--text-faint);
-        margin-top: 3px;
-        letter-spacing: 0.5px;
       }
 
-      .status-pill {
-        font-size: 0.64rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        padding: 5px 11px;
-        border-radius: 999px;
-        white-space: nowrap;
-        font-weight: 700;
-        border: 1px solid transparent;
-      }
-
-      .status-live { color: #04241a; background: linear-gradient(135deg, #37e6c4, #7dffcf); }
-      .status-dev { color: #041a24; background: linear-gradient(135deg, var(--neon-cyan), #7de0ff); }
-      .status-build { color: #1e1330; background: linear-gradient(135deg, var(--neon-violet), #b6a4ff); }
-      .status-concept { color: var(--text-dim); background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.15); }
-
-      .game-card .tagline {
-        color: var(--text-dim);
-        font-size: 0.9rem;
-        margin-bottom: 1.1rem;
-        min-height: 42px;
-      }
-
-      .tag-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 1.1rem;
-      }
-
-      .tag {
-        font-size: 0.68rem;
-        letter-spacing: 0.5px;
-        color: var(--text-dim);
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 4px 10px;
-        border-radius: 999px;
-      }
-
-      .game-card .meta-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        font-size: 0.84rem;
-        color: var(--text-dim);
-        border-top: 1px solid rgba(255, 255, 255, 0.07);
-        padding-top: 0.9rem;
-      }
-
-      .game-card .meta-list li {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 3px 0;
-      }
-
-      .game-card .meta-list b {
-        color: var(--text-main);
-        font-weight: 600;
-        text-align: right;
-      }
-
-      /* ---------- Tables ---------- */
-      table.data-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.88rem;
-      }
-
-      table.data-table th,
-      table.data-table td {
-        padding: 12px 14px;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      }
-
-      table.data-table th {
-        color: var(--neon-cyan);
-        font-size: 0.7rem;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        font-weight: 700;
-      }
-
-      table.data-table td {
-        color: var(--text-dim);
-      }
-
-      table.data-table td.hl {
-        color: var(--neon-gold);
-        font-weight: 700;
-      }
-
-      table.data-table tr:last-child td {
-        border-bottom: none;
-      }
-
-      .table-wrap {
-        overflow-x: auto;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--panel-border);
-      }
-
-      .table-wrap table {
-        min-width: 560px;
-      }
-
-      /* ---------- Code block ---------- */
-      pre.code {
-        background: #050508;
-        border: 1px solid rgba(0, 242, 254, 0.15);
-        border-radius: var(--radius-md);
-        padding: 1.3rem 1.5rem;
-        overflow-x: auto;
-        font-size: 0.82rem;
-        line-height: 1.55;
-        color: #b8f5ff;
-        font-family: "Consolas", "SF Mono", monospace;
-      }
-
-      pre.code .cm { color: #6a6a80; }
-      pre.code .kw { color: #ff8fd8; }
-      pre.code .fn { color: #7cffe8; }
-
-      /* ---------- Architecture pillars ---------- */
-      .pillar {
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        padding: 1.1rem 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      }
-
-      .pillar:last-child { border-bottom: none; }
-
-      .pillar .pillar-code {
-        font-family: "Orbitron", sans-serif;
-        font-size: 0.72rem;
-        color: var(--neon-violet);
-        background: rgba(122, 92, 255, 0.1);
-        border: 1px solid rgba(122, 92, 255, 0.25);
-        padding: 4px 9px;
-        border-radius: 8px;
-        white-space: nowrap;
-        margin-top: 2px;
-      }
-
-      .pillar-body h4 {
-        font-size: 0.95rem;
-        color: var(--text-main);
-        margin-bottom: 3px;
-      }
-
-      .pillar-body p {
-        margin: 0;
-        color: var(--text-dim);
-        font-size: 0.87rem;
-      }
-
-      /* ---------- Model operativo ---------- */
-      .role-card {
-        border-left: 2px solid var(--neon-cyan);
-        padding-left: 1.1rem;
-      }
-      .role-card.violet { border-left-color: var(--neon-violet); }
-
-      .role-card h4 {
+      .legal-card h3 {
         font-size: 1rem;
-        margin-bottom: 0.5rem;
         color: var(--text-main);
+        margin-bottom: 0.35rem;
       }
-      .role-card ul {
+
+      .legal-card p {
         margin: 0;
-        padding-left: 1.1rem;
         color: var(--text-dim);
-        font-size: 0.88rem;
+        font-size: 0.84rem;
       }
-      .role-card li { margin-bottom: 0.35rem; }
+
+      .legal-card.privacy h3 { color: var(--neon-cyan); }
+      .legal-card.terms h3 { color: var(--neon-violet); }
 
       /* ---------- Footer ---------- */
       footer.site-footer {
-        padding: 3rem 0 3.5rem;
         text-align: center;
+        margin-top: 3.2rem;
         color: var(--text-faint);
-        font-size: 0.82rem;
-      }
-
-      footer.site-footer .brand {
-        font-family: "Orbitron", sans-serif;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: var(--text-dim);
-        font-size: 0.75rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.78rem;
       }
 
       footer.site-footer a {
@@ -682,615 +261,202 @@
         color: var(--neon-cyan);
         border-color: currentColor;
       }
-
-      footer .foot-links {
-        display: flex;
-        gap: 18px;
-        justify-content: center;
-        flex-wrap: wrap;
-        margin-top: 1rem;
-      }
-
-      /* ---------- back to top ---------- */
-      .back-to-top {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--panel-strong);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--panel-border);
-        color: var(--neon-cyan);
-        text-decoration: none;
-        font-size: 1.15rem;
-        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
-        z-index: 40;
-      }
-
-      /* ---------- misc ---------- */
-      .center { text-align: center; }
-      .divider {
-        width: 60px;
-        height: 2px;
-        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-violet));
-        margin: 0 auto 1rem;
-        border-radius: 999px;
-      }
     </style>
   </head>
   <body>
-    <div class="bg-glow"></div>
-    <div class="bg-grid"></div>
+    <div class="lang-switch" id="langSwitch"></div>
 
-    <header class="top-nav">
-      <div class="nav-inner">
-        <div class="nav-brand"><span class="dot"></span> SunSof&nbsp;Games</div>
-        <nav class="nav-links">
-          <a href="#studio">Estudio</a>
-          <a href="#stack">Stack</a>
-          <a href="#games">Juegos</a>
-          <a href="#architecture">Arquitectura</a>
-          <a href="#business">Negocio</a>
-          <a href="#roadmap">Roadmap</a>
-        </nav>
-      </div>
-    </header>
+    <div class="wrap">
+      <header class="hero">
+        <div class="mark">S</div>
+        <h1 class="brand">SunSof Games</h1>
+        <p class="tagline" data-i18n="tagline"></p>
+      </header>
 
-    <main>
-      <section class="hero wrap" id="top">
-        <span class="hero-badge">✦ Developer Portal · Panel interno</span>
-        <h1>SunSof Games</h1>
-        <p class="lead">
-          Factoría de videojuegos móviles hiper-casuales impulsada por desarrollo agéntico. Este
-          panel es la puerta de entrada visual a la documentación técnica y de negocio que vive
-          en este repositorio — la única fuente de verdad del estudio.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#games">🎮 Ver catálogo de juegos</a>
-          <a class="btn btn-ghost" href="#architecture">📐 Reglas de arquitectura</a>
-        </div>
-        <div class="stat-strip">
-          <div class="stat"><div class="num">6</div><div class="label">Proyectos activos</div></div>
-          <div class="stat"><div class="num">&lt;15MB</div><div class="label">Peso máx. de APK</div></div>
-          <div class="stat"><div class="num">60</div><div class="label">FPS objetivo</div></div>
-          <div class="stat"><div class="num">$300</div><div class="label">Presupuesto inicial</div></div>
-          <div class="stat"><div class="num">0</div><div class="label">Motores pesados</div></div>
-        </div>
-      </section>
-
-      <!-- ===================== STUDIO ===================== -->
-      <section class="wrap" id="studio">
-        <span class="eyebrow">00 · Administración</span>
-        <h2 class="section-title">Filosofía del estudio</h2>
-        <p class="section-sub">
-          Un estudio de una sola persona, apalancado por un enjambre de agentes de IA, operando
-          bajo estándares estrictos de arquitectura de software y con foco quirúrgico en
-          Time-to-Market.
-        </p>
-
-        <div class="grid-2" style="margin-bottom: 1.4rem;">
-          <div class="card">
-            <h3 style="color: var(--neon-cyan); font-size: 1.05rem; margin-bottom: 0.8rem;">Misión</h3>
-            <p style="color: var(--text-dim); font-size: 0.94rem;">
-              Establecer un estudio de videojuegos móviles hiper-casuales de alta rentabilidad,
-              optimizando costos y tiempos mediante desarrollo agéntico basado en IA — más de 10
-              años de arquitectura fullstack humana dirigiendo un enjambre de agentes que
-              programan, auditan y documentan.
-            </p>
-            <p style="color: var(--text-dim); font-size: 0.94rem; margin-top: 0.8rem;">
-              Público objetivo: <b style="color: var(--text-main);">casual gamers globales</b> —
-              mecánicas simples, loops de enganche cortos, fáciles de aprender, difíciles de
-              dominar. Minimizar Time-to-Market sobre desarrollo complejo a largo plazo.
-            </p>
-          </div>
-          <div class="card">
-            <h3 style="color: var(--neon-violet); font-size: 1.05rem; margin-bottom: 0.8rem;">Modelo operativo</h3>
-            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-              <div class="role-card">
-                <h4>🧭 El Arquitecto (Humano)</h4>
-                <ul>
-                  <li>Dirección de producto y decisiones comerciales finales</li>
-                  <li>Revisión de seguridad y optimización de rendimiento</li>
-                  <li>Publicación en tiendas y configuración de plataformas</li>
-                </ul>
-              </div>
-              <div class="role-card violet">
-                <h4>🤖 El Enjambre de Agentes (IA)</h4>
-                <ul>
-                  <li>Ideación de juegos y análisis de mecánicas competitivas</li>
-                  <li>Generación de lógica de juego, CSS y resolución de bugs</li>
-                  <li>Assets estéticos, sprites placeholder y SFX sintetizados</li>
-                </ul>
-              </div>
+      <section id="gamesSection">
+        <div class="section-label" data-i18n="gamesLabel"></div>
+        <div class="game-list">
+          <div class="game-row">
+            <span class="game-dot" style="color: #00f2fe;"></span>
+            <div>
+              <h3>Blocky: Sync &amp; Fit</h3>
+              <p data-i18n="gameBlocky"></p>
             </div>
           </div>
-        </div>
-
-        <div class="grid-3">
-          <div class="mini-card">
-            <h3>🎯 Metas Corto Plazo</h3>
-            <p>Boilerplate estándar + 3 MVPs publicados en Google Play para validar retención, gasto &lt; $300 USD.</p>
+          <div class="game-row">
+            <span class="game-dot" style="color: #7a5cff;"></span>
+            <div>
+              <h3>Chronos Protocol</h3>
+              <p data-i18n="gameChronos"></p>
+            </div>
           </div>
-          <div class="mini-card">
-            <h3>📈 Metas Mediano Plazo</h3>
-            <p>AdMob integrado, retención D1 &gt; 35% / D7 &gt; 10%, pipeline CI/CD básico de builds nativos.</p>
+          <div class="game-row">
+            <span class="game-dot" style="color: #ff007f;"></span>
+            <div>
+              <h3>Dual Psych</h3>
+              <p data-i18n="gameDualPsych"></p>
+            </div>
           </div>
-          <div class="mini-card">
-            <h3>🚀 Metas Largo Plazo</h3>
-            <p>Flujo de caja positivo, catálogo de 10+ juegos activos, flujo agéntico 90% automatizado.</p>
+          <div class="game-row">
+            <span class="game-dot" style="color: #37e6c4;"></span>
+            <div>
+              <h3>HexaOrder</h3>
+              <p data-i18n="gameHexaOrder"></p>
+            </div>
+          </div>
+          <div class="game-row">
+            <span class="game-dot" style="color: #ffd700;"></span>
+            <div>
+              <h3>Magnet Pull</h3>
+              <p data-i18n="gameMagnetPull"></p>
+            </div>
+            <span class="game-soon" data-i18n="soon"></span>
           </div>
         </div>
       </section>
 
-      <!-- ===================== STACK ===================== -->
-      <section class="wrap" id="stack">
-        <span class="eyebrow">02 · Tecnología</span>
-        <h2 class="section-title">Stack Tecnológico Restringido</h2>
-        <p class="section-sub">
-          Enfoque <b style="color: var(--text-main);">"Vanilla Fast"</b>: cero dependencias
-          pesadas, portabilidad total, rendimiento predecible en cualquier gama de dispositivo.
-        </p>
-
-        <div class="grid-2" style="margin-bottom: 1.4rem;">
-          <div class="card">
-            <h3 style="color: var(--neon-cyan); font-size: 1.05rem; margin-bottom: 1rem;">Core tecnológico</h3>
-            <div class="tag-row">
-              <span class="tag">HTML5 Canvas 2D</span>
-              <span class="tag">Vanilla JS ES6+</span>
-              <span class="tag">CSS3 Flexbox/Grid</span>
-              <span class="tag">Web Audio API</span>
-              <span class="tag">Apache Cordova</span>
-              <span class="tag">LocalStorage</span>
-            </div>
-            <p style="color: var(--text-dim); font-size: 0.9rem;">
-              Prohibido: Unity, Three.js, PixiJS, React/Angular/Vue dentro del motor de juego,
-              Webpack/Vite/Rollup en runtime. Todo el audio se sintetiza en tiempo real — cero
-              archivos de sonido remotos.
-            </p>
-          </div>
-          <div class="card">
-            <h3 style="color: var(--neon-violet); font-size: 1.05rem; margin-bottom: 1rem;">Game Loop estándar</h3>
-            <pre class="code"><span class="cm">// Nunca setInterval() — siempre rAF + Delta Time</span>
-<span class="kw">let</span> lastTime = <span class="fn">0</span>;
-
-<span class="kw">function</span> <span class="fn">gameLoop</span>(timestamp) {
-  <span class="kw">const</span> dt = timestamp - lastTime;
-  lastTime = timestamp;
-
-  update(dt);
-  render();
-
-  requestAnimationFrame(gameLoop);
-}</pre>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="color: var(--neon-gold); font-size: 1.05rem; margin-bottom: 1rem;">Contrato de arquitectura por juego</h3>
-          <div class="grid-2">
-            <pre class="code">Juego-X/
-├── index.html
-├── css/
-│   └── styles.css
-└── js/
-    ├── main.js    <span class="cm">// loop + eventos</span>
-    ├── Game.js    <span class="cm">// estado global</span>
-    ├── Engine.js  <span class="cm">// render/colisión</span>
-    ├── Assets.js  <span class="cm">// audio + assets</span>
-    └── Entities/</pre>
-            <ul style="margin: 0; padding-left: 1.2rem; color: var(--text-dim); font-size: 0.9rem;">
-              <li style="margin-bottom: 0.5rem;"><b style="color: var(--text-main);">Object Pooling</b> obligatorio para balas, partículas, explosiones y entidades temporales — cero <code>new</code> dentro de <code>update()</code>/<code>render()</code>.</li>
-              <li style="margin-bottom: 0.5rem;"><b style="color: var(--text-main);">Resolución lógica</b> fija (1080×1920 vertical) — nunca se reescala para el dispositivo, solo el canvas contenedor.</li>
-              <li style="margin-bottom: 0.5rem;"><b style="color: var(--text-main);">Persistencia</b> 100% LocalStorage — sin backend/nube durante el MVP.</li>
-              <li><b style="color: var(--text-main);">Renderer puro</b>: <code>render()</code> nunca muta estado, solo dibuja.</li>
-            </ul>
-          </div>
+      <section>
+        <div class="section-label" data-i18n="legalLabel"></div>
+        <div class="legal-grid">
+          <a class="legal-card privacy" href="privacy-policy.html">
+            <span class="icon">🔒</span>
+            <h3 data-i18n="privacyTitle"></h3>
+            <p data-i18n="privacyDesc"></p>
+          </a>
+          <a class="legal-card terms" href="terms-conditions.html">
+            <span class="icon">📜</span>
+            <h3 data-i18n="termsTitle"></h3>
+            <p data-i18n="termsDesc"></p>
+          </a>
         </div>
       </section>
 
-      <!-- ===================== GAMES ===================== -->
-      <section class="wrap" id="games">
-        <span class="eyebrow">03 · Juegos</span>
-        <h2 class="section-title">Catálogo de Producción</h2>
-        <p class="section-sub">
-          Seis proyectos en distintas fases de madurez, todos sobre el mismo motor Canvas/Vanilla JS
-          y el mismo rulebook (<code>CLAUDE.md</code>).
+      <footer class="site-footer">
+        <p>
+          © 2026 SunSof Games. <span data-i18n="rights"></span> ·
+          <a href="mailto:ccamargov20@gmail.com">ccamargov20@gmail.com</a>
         </p>
+      </footer>
+    </div>
 
-        <div class="game-grid">
-          <!-- Blocky: Sync & Fit -->
-          <article class="game-card" style="--accent: #00f2fe;">
-            <div class="game-head">
-              <div>
-                <h3>Blocky: Sync &amp; Fit</h3>
-                <span class="codename">codename VibeStack · com.sunsofgames.blocky</span>
-              </div>
-              <span class="status-pill status-live">Pre-lanzamiento</span>
-            </div>
-            <p class="tagline">
-              Stacking de precisión por toque único. Torres infinitas, economía dual, 15 capítulos
-              por Historia, Vibe Combo, Jefe Final y Ranking Global vía Google Play Games.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Stacking</span>
-              <span class="tag">Endless Arcade</span>
-              <span class="tag">IAP + AdMob</span>
-              <span class="tag">GPGS v2</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Género de referencia</span><b>Ketchapp Stack</b></li>
-              <li><span>Reglas de arquitectura</span><b>117 ARQ + 3 de producción</b></li>
-              <li><span>Estado del build</span><b>APK ~7.1MB, BUILD OK</b></li>
-              <li><span>Pendiente</span><b>Alta de IAP en Play Console</b></li>
-            </ul>
-          </article>
+    <script>
+      var I18N = {
+        es: {
+          tagline: "Estudio independiente de videojuegos móviles hiper-casuales.",
+          gamesLabel: "Nuestros juegos",
+          gameBlocky: "Torres infinitas de precisión, un toque a la vez.",
+          gameChronos: "Plataformas cinematográfico contra un cronómetro que nunca se detiene.",
+          gameDualPsych: "Órbita dual de reflejos y precisión.",
+          gameHexaOrder: "Puzzle de colores sobre una grilla hexagonal.",
+          gameMagnetPull: "Runner de multiplicadores magnéticos.",
+          soon: "Próximamente",
+          legalLabel: "Documentos legales",
+          privacyTitle: "Política de Privacidad",
+          privacyDesc: "Cómo recopilamos, usamos y protegemos tus datos.",
+          termsTitle: "Términos y Condiciones",
+          termsDesc: "El acuerdo que rige el uso de nuestras aplicaciones.",
+          rights: "Todos los derechos reservados."
+        },
+        en: {
+          tagline: "Independent studio crafting hyper-casual mobile games.",
+          gamesLabel: "Our games",
+          gameBlocky: "Infinite precision towers, one tap at a time.",
+          gameChronos: "Cinematic platformer racing a clock that never stops.",
+          gameDualPsych: "Dual-orbit reflex and precision gameplay.",
+          gameHexaOrder: "Color-matching puzzle on a hexagonal grid.",
+          gameMagnetPull: "Magnetic multiplier runner.",
+          soon: "Coming soon",
+          legalLabel: "Legal documents",
+          privacyTitle: "Privacy Policy",
+          privacyDesc: "How we collect, use, and protect your data.",
+          termsTitle: "Terms &amp; Conditions",
+          termsDesc: "The agreement governing the use of our apps.",
+          rights: "All rights reserved."
+        },
+        pt: {
+          tagline: "Estúdio independente de jogos móveis hiper-casuais.",
+          gamesLabel: "Nossos jogos",
+          gameBlocky: "Torres infinitas de precisão, um toque de cada vez.",
+          gameChronos: "Plataforma cinematográfica contra um cronômetro que nunca para.",
+          gameDualPsych: "Órbita dupla de reflexos e precisão.",
+          gameHexaOrder: "Quebra-cabeça de cores em uma grade hexagonal.",
+          gameMagnetPull: "Corrida de multiplicadores magnéticos.",
+          soon: "Em breve",
+          legalLabel: "Documentos legais",
+          privacyTitle: "Política de Privacidade",
+          privacyDesc: "Como coletamos, usamos e protegemos seus dados.",
+          termsTitle: "Termos e Condições",
+          termsDesc: "O acordo que rege o uso dos nossos aplicativos.",
+          rights: "Todos os direitos reservados."
+        },
+        fr: {
+          tagline: "Studio indépendant de jeux mobiles hyper-casual.",
+          gamesLabel: "Nos jeux",
+          gameBlocky: "Tours infinies de précision, un tap à la fois.",
+          gameChronos: "Plateforme cinématographique contre un chronomètre qui ne s'arrête jamais.",
+          gameDualPsych: "Orbite double de réflexes et de précision.",
+          gameHexaOrder: "Puzzle de couleurs sur une grille hexagonale.",
+          gameMagnetPull: "Course de multiplicateurs magnétiques.",
+          soon: "Bientôt disponible",
+          legalLabel: "Documents légaux",
+          privacyTitle: "Politique de Confidentialité",
+          privacyDesc: "Comment nous collectons, utilisons et protégeons vos données.",
+          termsTitle: "Conditions Générales",
+          termsDesc: "L'accord régissant l'utilisation de nos applications.",
+          rights: "Tous droits réservés."
+        },
+        de: {
+          tagline: "Unabhängiges Studio für Hyper-Casual-Mobile-Games.",
+          gamesLabel: "Unsere Spiele",
+          gameBlocky: "Unendliche Präzisionstürme, ein Tap nach dem anderen.",
+          gameChronos: "Cineastisches Jump'n'Run gegen eine Uhr, die niemals stoppt.",
+          gameDualPsych: "Duale Orbit-Reflex- und Präzisionsmechanik.",
+          gameHexaOrder: "Farb-Puzzle auf einem Sechseck-Raster.",
+          gameMagnetPull: "Magnetischer Multiplikator-Runner.",
+          soon: "Demnächst",
+          legalLabel: "Rechtliche Dokumente",
+          privacyTitle: "Datenschutzrichtlinie",
+          privacyDesc: "Wie wir deine Daten erheben, nutzen und schützen.",
+          termsTitle: "Allgemeine Geschäftsbedingungen",
+          termsDesc: "Die Vereinbarung zur Nutzung unserer Apps.",
+          rights: "Alle Rechte vorbehalten."
+        }
+      };
 
-          <!-- Chronos Protocol -->
-          <article class="game-card" style="--accent: #7a5cff;">
-            <div class="game-head">
-              <div>
-                <h3>Chronos Protocol</h3>
-                <span class="codename">30 Minutes to Live</span>
-              </div>
-              <span class="status-pill status-dev">En desarrollo</span>
-            </div>
-            <p class="tagline">
-              Plataformas cinematográfico de 10 pisos inspirado en Prince of Persia (1989). Un
-              cronómetro global de 30 minutos que nunca se detiene, ni siquiera al morir.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Plataformas</span>
-              <span class="tag">Narrativo</span>
-              <span class="tag">D-Pad táctil</span>
-              <span class="tag">QTE combate</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Protagonista</span><b>Dr. Caelen Vance</b></li>
-              <li><span>Mapas</span><b>Arrays 2D tile-based</b></li>
-              <li><span>Muerte</span><b>Reset de piso, timer nunca vuelve</b></li>
-              <li><span>Controles</span><b>D-Pad + Saltar/Agachar</b></li>
-            </ul>
-          </article>
+      var SUPPORTED = ["es", "en", "pt", "fr", "de"];
+      var LABELS = { es: "ES", en: "EN", pt: "PT", fr: "FR", de: "DE" };
 
-          <!-- Dual Psych -->
-          <article class="game-card" style="--accent: #ff007f;">
-            <div class="game-head">
-              <div>
-                <h3>Dual Psych</h3>
-                <span class="codename">Neural Orbit</span>
-              </div>
-              <span class="status-pill status-build">MVP completo</span>
-            </div>
-            <p class="tagline">
-              Órbita dual síncrona inspirada en <i>Duet</i>. Dos nodos (Id/Ego) giran alrededor de un
-              eje mientras el jugador esquiva barreras cognitivas en 5 etapas psicológicas.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Precisión</span>
-              <span class="tag">Reflejos</span>
-              <span class="tag">Narrativa Psicológica</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Género de referencia</span><b>Duet · Super Hexagon</b></li>
-              <li><span>Retención objetivo D1</span><b>45–48%</b></li>
-              <li><span>Etapas</span><b>Negación → Aceptación</b></li>
-              <li><span>Sesión promedio</span><b>~12 min</b></li>
-            </ul>
-          </article>
+      function detectLang() {
+        var saved = localStorage.getItem("sunsof_lang");
+        if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+        var nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+        return SUPPORTED.indexOf(nav) !== -1 ? nav : "en";
+      }
 
-          <!-- HexaOrder -->
-          <article class="game-card" style="--accent: #37e6c4;">
-            <div class="game-head">
-              <div>
-                <h3>HexaOrder</h3>
-                <span class="codename">Color Grid</span>
-              </div>
-              <span class="status-pill status-build">v1 jugable</span>
-            </div>
-            <p class="tagline">
-              Puzzle lógico-cromático sobre grilla hexagonal. Fusiona caras del mismo color hasta
-              colapsar hexágonos completos — el juego "de bajar pulsaciones" del catálogo.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Puzzle</span>
-              <span class="tag">Color Matching</span>
-              <span class="tag">Bajo estrés</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Género de referencia</span><b>Hexa Sort · Color Grid</b></li>
-              <li><span>Grilla</span><b>Radio 3 · 19 casillas</b></li>
-              <li><span>Retención objetivo D30</span><b>12–15%</b></li>
-              <li><span>Sesión promedio</span><b>8.5 min</b></li>
-            </ul>
-          </article>
+      function applyLang(lang) {
+        var dict = I18N[lang] || I18N.en;
+        document.documentElement.setAttribute("lang", lang);
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (dict[key] != null) el.innerHTML = dict[key];
+        });
+        document.querySelectorAll("#langSwitch button").forEach(function (btn) {
+          btn.classList.toggle("active", btn.dataset.lang === lang);
+        });
+        localStorage.setItem("sunsof_lang", lang);
+      }
 
-          <!-- Magnet Pull -->
-          <article class="game-card" style="--accent: #ffd700;">
-            <div class="game-head">
-              <div>
-                <h3>Magnet Pull</h3>
-                <span class="codename">Gate Multiplier</span>
-              </div>
-              <span class="status-pill status-concept">Conceptual</span>
-            </div>
-            <p class="tagline">
-              Runner de multiplicadores tipo swerve. Una bola rueda automáticamente atravesando
-              compuertas matemáticas (×2, +5, ÷3) que multiplican un enjambre de micro-esferas.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Swerve Runner</span>
-              <span class="tag">Multiplicador</span>
-              <span class="tag">Viral TikTok</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Dificultad de dev (IA)</span><b>Media</b></li>
-              <li><span>Potencial viral</span><b>Muy alto</b></li>
-              <li><span>Retención objetivo D1</span><b>~40%</b></li>
-              <li><span>Sprint asignado</span><b>Sprint 2 (backlog)</b></li>
-            </ul>
-          </article>
+      var switchEl = document.getElementById("langSwitch");
+      SUPPORTED.forEach(function (lang) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.lang = lang;
+        btn.textContent = LABELS[lang];
+        btn.addEventListener("click", function () { applyLang(lang); });
+        switchEl.appendChild(btn);
+      });
 
-          <!-- Boilerplate -->
-          <article class="game-card" style="--accent: #9a9ab0;">
-            <div class="game-head">
-              <div>
-                <h3>Boilerplate</h3>
-                <span class="codename">Motor compartido del estudio</span>
-              </div>
-              <span class="status-pill status-concept">Infraestructura</span>
-            </div>
-            <p class="tagline">
-              Plantilla maestra reutilizable: ciclo de vida del juego, Game Loop con Delta Time,
-              TutorialManager genérico, Splash Manager y hooks de monetización listos para clonar.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Game Loop</span>
-              <span class="tag">TutorialManager</span>
-              <span class="tag">Splash cross-game</span>
-            </div>
-            <ul class="meta-list">
-              <li><span>Consumido por</span><b>Todo el catálogo</b></li>
-              <li><span>Contrato</span><b>02-tecnologia/stack.md</b></li>
-              <li><span>Regla de oro</span><b>Cero motores pesados</b></li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <!-- ===================== ARCHITECTURE ===================== -->
-      <section class="wrap" id="architecture">
-        <span class="eyebrow">CLAUDE.md · Rulebook</span>
-        <h2 class="section-title">Arquitectura y Estándares de Ingeniería</h2>
-        <p class="section-sub">
-          Más de <b style="color: var(--text-main);">115 reglas ARQ</b> numeradas gobiernan cada
-          decisión técnica del catálogo — desde el bucle de renderizado hasta la validación de
-          recibos de compra. Estas son las columnas vertebrales.
-        </p>
-
-        <div class="grid-2">
-          <div class="card">
-            <h3 style="color: var(--neon-cyan); font-size: 1rem; margin-bottom: 0.4rem;">Núcleo del motor (ARQ-001 → 033)</h3>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-010</span>
-              <div class="pillar-body">
-                <h4>Flujo Input → Update(dt) → Render</h4>
-                <p>Tres etapas secuenciales estrictas por frame; el audio se dispara dentro de UPDATE sin bloquear el render.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-011</span>
-              <div class="pillar-body">
-                <h4>Renderer puro</h4>
-                <p>Prohibido mutar estado, instanciar objetos o calcular colisiones dentro de <code>render()</code>.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-031</span>
-              <div class="pillar-body">
-                <h4>Object Pooling obligatorio</h4>
-                <p>Partículas, fragmentos y VFX masivos usan pools pre-asignados de tamaño fijo — cero presión sobre el GC móvil.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-032</span>
-              <div class="pillar-body">
-                <h4>Soporte DPR</h4>
-                <p><code>devicePixelRatio</code> siempre calculado para nitidez absoluta en pantallas OLED/Retina sin perder rendimiento.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 style="color: var(--neon-violet); font-size: 1rem; margin-bottom: 0.4rem;">Identidad visual y economía (ARQ-050 → 117)</h3>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-054</span>
-              <div class="pillar-body">
-                <h4>Glassmorphism OLED</h4>
-                <p>Superficies casi transparentes + <code>backdrop-filter: blur()</code> sobre fondo negro OLED puro — el lenguaje visual de todo el catálogo.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-105</span>
-              <div class="pillar-body">
-                <h4>Curva de Tensión Escalonada</h4>
-                <p>Dificultad y economía se dosifican por bloques/eventos apilados en la partida actual, nunca por capítulo — cualquier Historia arranca igual de legible.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-116</span>
-              <div class="pillar-body">
-                <h4>Moneda Única</h4>
-                <p>Retiro del sistema dual de divisas a favor de una sola moneda (Neon Coins) — skins, Historias y revivals se compran y ganan con el mismo saldo.</p>
-              </div>
-            </div>
-            <div class="pillar">
-              <span class="pillar-code">ARQ-117</span>
-              <div class="pillar-body">
-                <h4>AdManager productivo</h4>
-                <p>Banner + Interstitial + Rewarded sobre un único plugin nativo, con estrategia antifrustración basada en partidas perdidas acumuladas.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top: 1.4rem;">
-          <h3 style="color: var(--neon-gold); font-size: 1rem; margin-bottom: 1rem;">Protocolo de razonamiento obligatorio (AI Thinking Protocol)</h3>
-          <p style="color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1rem;">
-            Antes de escribir código, todo agente debe validar mentalmente este checklist —
-            documentado íntegro en <code>CLAUDE.md</code>:
-          </p>
-          <div class="grid-3">
-            <div class="mini-card"><h3>1. Duplicación</h3><p>¿Esta lógica ya existe en <code>Engine.js</code> o <code>Assets.js</code>?</p></div>
-            <div class="mini-card"><h3>2. GameState</h3><p>¿Qué estructura de datos se ve alterada por esta función?</p></div>
-            <div class="mini-card"><h3>3. Memoria</h3><p>¿Se instancian objetos que activen el GC en móviles?</p></div>
-          </div>
-          <div class="grid-3" style="margin-top: 1.4rem;">
-            <div class="mini-card"><h3>4. Render puro</h3><p>¿Afecta al renderizado puro del Canvas?</p></div>
-            <div class="mini-card"><h3>5. KISS</h3><p>¿Es la solución más simple que cumple el requisito?</p></div>
-            <div class="mini-card"><h3>Fuente completa</h3><p><code>CLAUDE.md</code>, raíz del repositorio.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================== BUSINESS ===================== -->
-      <section class="wrap" id="business">
-        <span class="eyebrow">01 · Negocio</span>
-        <h2 class="section-title">Modelo de Negocio y Monetización</h2>
-        <p class="section-sub">
-          F2P puro sustentado en publicidad programática (IAA). Bootstrap growth: $0 en pauta
-          hasta validar retención orgánica &gt; 35% D1.
-        </p>
-
-        <div class="grid-3" style="margin-bottom: 1.4rem;">
-          <div class="mini-card">
-            <h3>📺 Rewarded Videos</h3>
-            <p>Máxima prioridad. Revivir instantáneo y multiplicador de recompensa al finalizar partida.</p>
-          </div>
-          <div class="mini-card">
-            <h3>🖥️ Interstitial Ads</h3>
-            <p>Frecuencia controlada — cada 3–4 partidas perdidas, nunca a mitad de sesión.</p>
-          </div>
-          <div class="mini-card">
-            <h3>📊 Banner Ads</h3>
-            <p>Ingreso pasivo fuera del área de juego, respetando Safe Area táctil.</p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom: 1.4rem;">
-          <h3 style="color: var(--neon-cyan); font-size: 1.05rem; margin-bottom: 1rem;">eCPM por Tier geográfico (industria, 2026)</h3>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr><th>Formato</th><th>Tier 1 (USA/EU/JP)</th><th>Tier 2–3 (LatAm)</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Rewarded Video</td><td class="hl">$15.00 – $30.00</td><td>$1.50 – $4.00</td></tr>
-                <tr><td>Interstitial</td><td class="hl">$8.00 – $15.00</td><td>$0.60 – $1.80</td></tr>
-                <tr><td>Banner</td><td class="hl">$0.40 – $1.20</td><td>$0.05 – $0.20</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="color: var(--neon-violet); font-size: 1.05rem; margin-bottom: 1rem;">Proyección de ingresos por escalamiento del catálogo</h3>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr><th>Escenario</th><th>DAU Globales</th><th>Ingreso Mensual Bruto</th><th>Neto estimado (CO)</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>A · Inicio (3 apps)</td><td>7,500</td><td>$8,043.60</td><td class="hl">~$7,239.00</td></tr>
-                <tr><td>B · Enjambre agéntico (10 apps)</td><td>25,000</td><td>$26,812.50</td><td class="hl">~$24,131.00</td></tr>
-                <tr><td>C · Efecto viral (1 app)</td><td>50,000</td><td>$99,000.00</td><td class="hl">~$89,100.00</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p style="color: var(--text-faint); font-size: 0.8rem; margin-top: 0.9rem; margin-bottom: 0;">
-            Regla de oro algorítmica: LTV &gt; CAC. Presupuesto inicial de $300 USD implica CAC = $0
-            hasta validar retención — todo ingreso de AdMob se reinvierte en tracción del ganador.
-          </p>
-        </div>
-      </section>
-
-      <!-- ===================== ROADMAP ===================== -->
-      <section class="wrap" id="roadmap">
-        <span class="eyebrow">00 · Roadmap</span>
-        <h2 class="section-title">Lanzamiento Express — 12 Semanas</h2>
-        <p class="section-sub">
-          No se busca "el juego perfecto" — el objetivo es lanzar 3 MVPs jugables en Google Play en
-          un ciclo de 90 días, con el 85% del trabajo operativo delegado a agentes.
-        </p>
-
-        <div class="card" style="padding: 0.5rem 0.5rem 1.4rem;">
-          <div class="pipeline">
-            <div class="phase">
-              <div class="phase-num">Fase 1 · Semanas 1-2</div>
-              <h4>Infraestructura y Boilerplate</h4>
-              <ul>
-                <li>Documentación base (objetivos, stack, monetización)</li>
-                <li>Boilerplate maestro a 60 FPS</li>
-                <li>Capacitor/Cordova + cuenta Google Play (-$25)</li>
-                <li>AdMob en modo Sandbox</li>
-              </ul>
-            </div>
-            <div class="phase">
-              <div class="phase-num">Fase 2 · Semanas 3-8</div>
-              <h4>Producción Agéntica</h4>
-              <ul>
-                <li>Sprint de 2 semanas por MVP</li>
-                <li>Juego A: desarrollo + build interna</li>
-                <li>Juego A a Play Store · Juego B en dev</li>
-                <li>Juego B a pruebas · Juego C en dev</li>
-              </ul>
-            </div>
-            <div class="phase">
-              <div class="phase-num">Fase 3 · Semanas 9-12</div>
-              <h4>Métricas y Validación</h4>
-              <ul>
-                <li>3 apps publicadas, auditoría de retención D1</li>
-                <li>Soft launch pagado (-$50, TikTok/Google Ads)</li>
-                <li>Meta: 400 descargas pagadas</li>
-                <li>Evaluación LTV &gt; CAC + backlog siguiente tanda</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="table-wrap" style="margin-top: 1.4rem;">
-          <table class="data-table">
-            <thead>
-              <tr><th>Hito</th><th>Meta de apps</th><th>Descargas est.</th><th>Presupuesto consumido</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Fin Mes 1 (W4)</td><td>1 MVP terminado</td><td>0 (build)</td><td>$25 USD</td></tr>
-              <tr><td>Fin Mes 2 (W8)</td><td>2 en tienda, 1 en dev</td><td>~500 orgánicas</td><td>$25 USD</td></tr>
-              <tr><td>Fin Mes 3 (W12)</td><td class="hl">3 en producción</td><td class="hl">+2,000 combinadas</td><td>$75 USD</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="wrap">
-        <div class="divider"></div>
-        <div class="brand">SunSof Games</div>
-        <p>Panel interno de desarrollo — generado a partir de la documentación viva del repositorio.</p>
-        <div class="foot-links">
-          <a href="CLAUDE.md">CLAUDE.md</a>
-          <a href="README.md">README del repositorio</a>
-          <a href="03-juegos/BlockySyncFit/legal/privacy-policy.html">Privacy Policy</a>
-          <a href="03-juegos/BlockySyncFit/legal/terms-conditions.html">Terms &amp; Conditions</a>
-        </div>
-      </div>
-    </footer>
-
-    <a class="back-to-top" href="#top" aria-label="Volver arriba">↑</a>
+      applyLang(detectLang());
+    </script>
   </body>
 </html>
